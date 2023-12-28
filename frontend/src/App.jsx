@@ -20,11 +20,20 @@ function App() {
   }, []);
 
   return (
-    <div className='wrapper'>
-      {memes.map((meme) => (
-        <Meme key={meme._id} {...meme} />
-      ))}
-    </div>
+    <>
+      <div>
+        <h1>Memer</h1>
+        <h2>
+          Make your own memes! <a href='/add'>Add a meme</a>
+        </h2>
+      </div>
+      <hr />
+      <div className='wrapper'>
+        {memes.map((meme) => (
+          <Meme key={meme._id} {...meme} />
+        ))}
+      </div>
+    </>
   );
 }
 
