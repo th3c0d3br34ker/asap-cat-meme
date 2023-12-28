@@ -1,6 +1,7 @@
 require('dotenv').config({ path: '.env.local' });
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors')
 
 const Meme = require('./schema/Meme.js')
 
@@ -15,6 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
+app.use(cors())
 app.use(express.json())
 
 app.listen(PORT, () => {

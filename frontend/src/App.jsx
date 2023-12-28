@@ -1,17 +1,30 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 import Meme from './components/Meme';
 
-const meme = {
-  name: 'rizz_cat',
-  img_url:
-    'https://i.pinimg.com/originals/14/58/8f/14588fa9aca2fab5d79c95b49e4ed830.jpg',
-};
+const API_URI = import.meta.env.VITE_API_URI;
 
 function App() {
+  const [memes, setMemes] = useState([]);
+
+  useEffect(() => {
+    fetch(API_URI + '/data')
+      .then((res) => res.json())
+      .then((memes) => {
+        setMemes(memes);
+      })
+      .catch((err) => {
+        console.error(err);
+        setMemes([]);
+      });
+  }, []);
+
   return (
-    <>
-      <Meme {...meme} />
-    </>
+    <div className='wrapper'>
+      {memes.map((meme) => (
+        <Meme key={meme._id} {...meme} />
+      ))}
+    </div>
   );
 }
 
