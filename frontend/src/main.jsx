@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
       <Routes>
         <Route path='/' element={<App />} />
-        <Route path='/add' element={<AddMeme />} />
+        <Route path='/:id' element={<AddMeme />} />
       </Routes>
     </Router>
   </React.StrictMode>

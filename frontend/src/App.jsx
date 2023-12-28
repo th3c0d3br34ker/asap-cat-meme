@@ -19,18 +19,30 @@ function App() {
       });
   }, []);
 
+
+  const handleDelete = async (id) => {
+    const response = await fetch(API_URI + '/data/' + id, {
+      method: 'DELETE',
+    });
+
+    if (response.status === 200) {
+      setMemes(memes.filter((meme) => meme._id !== id));
+      alert('Meme deleted successfully!');
+    }
+  }
+
   return (
     <>
       <div>
         <h1>Memer</h1>
         <h2>
-          Make your own memes! <a href='/add'>Add a meme</a>
+          Make your own memes! <a href='/new'>Add a meme</a>
         </h2>
       </div>
       <hr />
       <div className='wrapper'>
         {memes.map((meme) => (
-          <Meme key={meme._id} {...meme} />
+          <Meme key={meme._id} {...meme} handleDelete={handleDelete} />
         ))}
       </div>
     </>

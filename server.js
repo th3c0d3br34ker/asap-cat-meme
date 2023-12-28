@@ -32,6 +32,15 @@ app.get('/data', async (req, res) => {
   res.send(await Meme.find());
 })
 
+// Read one data
+app.get('/data/:id', async (req, res) => {
+  const meme = await Meme.findById(req.params.id)
+
+  if (!meme) return res.send("Meme not found! :(")
+
+  res.send(meme)
+})
+
 // Create data
 app.post('/data', async (req, res) => {
   const newMeme = new Meme(req.body)
