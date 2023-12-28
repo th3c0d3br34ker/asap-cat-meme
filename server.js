@@ -2,6 +2,8 @@ require('dotenv').config({ path: '.env.local' });
 const express = require('express');
 const mongoose = require('mongoose');
 
+const Meme = require('./schema/Meme.js')
+
 mongoose.connect(process.env.MONGO_URI);
 
 mongoose.connection.once('open', () => {
@@ -19,3 +21,8 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
   res.send('o_O');
 });
+
+
+app.get('/data', async (req, res) => {
+  res.send(await Meme.find());
+})
