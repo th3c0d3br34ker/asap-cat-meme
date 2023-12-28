@@ -1,0 +1,18 @@
+meta {
+  name: Create Data
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/data
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "rizz",
+    "img_url": "https://i.pinimg.com/originals/14/58/8f/14588fa9aca2fab5d79c95b49e4ed830.jpg"
+  }
+}

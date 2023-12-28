@@ -14,6 +14,9 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+
+app.use(express.json())
+
 app.listen(PORT, () => {
   console.log('🚀 server started on port:', PORT);
 });
@@ -22,7 +25,41 @@ app.get('/', (req, res) => {
   res.send('o_O');
 });
 
-
+// Read data
 app.get('/data', async (req, res) => {
   res.send(await Meme.find());
+})
+
+// Create data
+app.post('/data', async (req, res) => {
+  const newMeme = new Meme(req.body)
+
+  await newMeme.save()
+
+  res.send(meme)
+})
+
+// Update data
+app.put('/data/:id', async (req, res) => {
+  const meme = await Meme.findById(req.params.id);
+
+  if (!meme) return res.send("Meme not found! :(")
+
+  await meme.updateOne(req.body)
+
+  await meme.save()
+
+  res.send(meme);
+});
+
+
+// Delete data
+app.delete("/data/:id", async (req, res) => {
+  const meme = await Meme.findById(req.params.id)
+
+  if (!meme) return res.send("Meme not found! :(")
+
+  await meme.deleteOne()
+
+  res.send(meme)
 })

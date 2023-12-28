@@ -1,0 +1,18 @@
+meta {
+  name: Delete Data
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://localhost:3000/data/658c0cbc4d3fdc731c07e3bc
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "rizz_cat",
+    "img_url": "https://i.pinimg.com/originals/14/58/8f/14588fa9aca2fab5d79c95b49e4ed830.jpg"
+  }
+}

@@ -1,0 +1,18 @@
+meta {
+  name: Update Data
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/data/658d38e82ca933b6c95c790a
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "rizz_cat",
+    "img_url": "https://i.pinimg.com/originals/14/58/8f/14588fa9aca2fab5d79c95b49e4ed830.jpg"
+  }
+}
