@@ -1,0 +1,22 @@
+meta {
+  name: delete meme by id
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://localhost:3000/api/memes/{{memeId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "angry_cat_s",
+    "img_url": "https://i.pinimg.com/474x/64/6b/af/646baf16ffbcc38037dfa7bfb79a9fa8.jpg"
+  }
+}
+
+vars:pre-request {
+  memeId: 658d6a139c97cce891f2be0c
+}

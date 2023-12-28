@@ -1,0 +1,15 @@
+meta {
+  name: get meme by id
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/api/memes/{{memeId}}
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  memeId: 658c0d07c9c5d147ad507b61
+}

@@ -10,7 +10,7 @@ function App() {
   const [memes, setMemes] = useState([]);
 
   useEffect(() => {
-    fetch(API_URI + '/data')
+    fetch(API_URI + '/memes')
       .then((res) => res.json())
       .then((memes) => {
         setMemes(memes);
@@ -23,7 +23,7 @@ function App() {
 
 
   const handleDelete = async (id) => {
-    const response = await fetch(API_URI + '/data/' + id, {
+    const response = await fetch(API_URI + '/memes/' + id, {
       method: 'DELETE',
     });
 

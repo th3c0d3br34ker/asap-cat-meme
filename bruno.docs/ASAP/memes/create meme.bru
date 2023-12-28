@@ -1,0 +1,22 @@
+meta {
+  name: create meme
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/api/memes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "angry_cat_s",
+    "img_url": "https://i.pinimg.com/474x/64/6b/af/646baf16ffbcc38037dfa7bfb79a9fa8.jpg"
+  }
+}
+
+vars:pre-request {
+  memeId: 658c0d07c9c5d147ad507b61
+}

@@ -16,7 +16,7 @@ const AddMeme = () => {
 
   useEffect(() => {
     if (mode === 'EDIT') {
-      fetch(API_URI + '/data/' + params.id)
+      fetch(API_URI + '/memes/' + params.id)
         .then((res) => res.json())
         .then((fetchedData) => {
           console.log(fetchedData);
@@ -33,7 +33,7 @@ const AddMeme = () => {
   };
 
   const createMeme = async () => {
-    const response = await fetch(API_URI + '/data', {
+    const response = await fetch(API_URI + '/memes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const AddMeme = () => {
   };
 
   const updateMeme = async () => {
-    const response = await fetch(API_URI + '/data/' + params.id, {
+    const response = await fetch(API_URI + '/memes/' + params.id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -81,8 +81,10 @@ const AddMeme = () => {
   return (
     <>
       <div className='top-nav'>
-        <button onClick={() => navigate('/')}>Go Back</button>
-        <button onClick={() => navigate('/new')}>Add a meme</button>
+        <button onClick={() => navigate('/')}>🔙 Go Back</button>
+        {mode === 'EDIT' && (
+          <button onClick={() => navigate('/new')}>➕ meme</button>
+        )}
       </div>
 
       <h1>{mode === 'CREATE' ? 'Add' : 'Edit'} Meme</h1>
@@ -105,7 +107,7 @@ const AddMeme = () => {
         />
 
         <button type='submit' className='submit-button'>
-          {mode === 'CREATE' ? 'Add Meme' : 'Edit Meme'}
+          {mode === 'CREATE' ? '➕' : '✏️'} Meme
         </button>
       </form>
     </>
