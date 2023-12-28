@@ -17,6 +17,7 @@
 
 .meme-img {
   width: 100%;
+  min-width: 120px;
   height: auto;
   border-bottom: 1px solid #ddd;
 }

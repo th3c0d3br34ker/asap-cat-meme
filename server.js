@@ -38,7 +38,7 @@ app.post('/data', async (req, res) => {
 
   await newMeme.save()
 
-  res.send(meme)
+  res.send(newMeme);
 })
 
 // Update data
