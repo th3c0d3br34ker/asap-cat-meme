@@ -31,10 +31,7 @@ const AddMeme = () => {
     setData({ ...data, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(data);
-
+  const createMeme = async () => {
     const response = await fetch(API_URI + '/data', {
       method: 'POST',
       headers: {
@@ -50,6 +47,33 @@ const AddMeme = () => {
       });
 
       alert('Meme added successfully!');
+    }
+  }
+
+  const updateMeme = async () => {
+    const response = await fetch(API_URI + '/data/' + params.id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.status === 200) {
+      alert('Meme updated successfully!');
+    }
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(data);
+
+    if (mode === 'CREATE') {
+      await createMeme();
+    }
+  
+    if (mode === 'EDIT') {
+      await updateMeme();
     }
   };
 
