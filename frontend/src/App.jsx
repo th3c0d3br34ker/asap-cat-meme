@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Meme from './components/Meme';
+import { useNavigate } from 'react-router-dom';
 
 const API_URI = import.meta.env.VITE_API_URI;
 
 function App() {
+  const navigate = useNavigate();
   const [memes, setMemes] = useState([]);
 
   useEffect(() => {
@@ -35,9 +37,8 @@ function App() {
     <>
       <div>
         <h1>Memer</h1>
-        <h2>
-          Make your own memes! <a href='/new'>Add a meme</a>
-        </h2>
+        <h2>Make your own memes!</h2>
+        <button onClick={() => navigate('/new')}>Add a meme</button>
       </div>
       <hr />
       <div className='wrapper'>

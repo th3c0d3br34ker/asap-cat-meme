@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const API_URI = import.meta.env.VITE_API_URI;
 
 const AddMeme = () => {
   const params = useParams();
+  const navigate = useNavigate();
 
   const mode = params.id === 'new' ? 'CREATE' : 'EDIT';
 
@@ -48,7 +49,7 @@ const AddMeme = () => {
 
       alert('Meme added successfully!');
     }
-  }
+  };
 
   const updateMeme = async () => {
     const response = await fetch(API_URI + '/data/' + params.id, {
@@ -62,7 +63,7 @@ const AddMeme = () => {
     if (response.status === 200) {
       alert('Meme updated successfully!');
     }
-  }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -71,29 +72,43 @@ const AddMeme = () => {
     if (mode === 'CREATE') {
       await createMeme();
     }
-  
+
     if (mode === 'EDIT') {
       await updateMeme();
     }
   };
 
   return (
-    <form className='meme-form' onSubmit={handleSubmit}>
-      <label htmlFor='name'>Meme Name:</label>
-      <input id='name' name='name' value={data.name} onChange={handleChange} />
+    <>
+      <div className='top-nav'>
+        <button onClick={() => navigate('/')}>Go Back</button>
+        <button onClick={() => navigate('/new')}>Add a meme</button>
+      </div>
 
-      <label htmlFor='img_url'>Image URL:</label>
-      <input
-        id='img_url'
-        name='img_url'
-        value={data.img_url}
-        onChange={handleChange}
-      />
+      <h1>{mode === 'CREATE' ? 'Add' : 'Edit'} Meme</h1>
 
-      <button type='submit' className='submit-button'>
-        {mode === 'CREATE' ? 'Add Meme' : 'Edit Meme'}
-      </button>
-    </form>
+      <form className='meme-form' onSubmit={handleSubmit}>
+        <label htmlFor='name'>Meme Name:</label>
+        <input
+          id='name'
+          name='name'
+          value={data.name}
+          onChange={handleChange}
+        />
+
+        <label htmlFor='img_url'>Image URL:</label>
+        <input
+          id='img_url'
+          name='img_url'
+          value={data.img_url}
+          onChange={handleChange}
+        />
+
+        <button type='submit' className='submit-button'>
+          {mode === 'CREATE' ? 'Add Meme' : 'Edit Meme'}
+        </button>
+      </form>
+    </>
   );
 };
 
