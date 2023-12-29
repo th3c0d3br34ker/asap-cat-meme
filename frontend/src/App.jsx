@@ -2,25 +2,31 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Meme from './components/Meme';
 import { useNavigate } from 'react-router-dom';
+import useAuth from './hooks/useAuth';
 
 const API_URI = import.meta.env.VITE_API_URI;
 
 function App() {
+  const auth = useAuth();
   const navigate = useNavigate();
   const [memes, setMemes] = useState([]);
 
   useEffect(() => {
-    fetch(API_URI + '/memes')
-      .then((res) => res.json())
-      .then((memes) => {
-        setMemes(memes);
-      })
-      .catch((err) => {
-        console.error(err);
-        setMemes([]);
-      });
+    console.log(auth.isLoggedIn());
+    if (auth.isLoggedIn()) {
+      fetch(API_URI + '/memes')
+        .then((res) => res.json())
+        .then((memes) => {
+          setMemes(memes);
+        })
+        .catch((err) => {
+          console.error(err);
+          setMemes([]);
+        });
+    } else {
+       navigate('/login');
+    }
   }, []);
-
 
   const handleDelete = async (id) => {
     const response = await fetch(API_URI + '/memes/' + id, {
@@ -31,7 +37,7 @@ function App() {
       setMemes(memes.filter((meme) => meme._id !== id));
       alert('Meme deleted successfully!');
     }
-  }
+  };
 
   return (
     <>

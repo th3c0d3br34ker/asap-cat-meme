@@ -1,0 +1,22 @@
+meta {
+  name: delete user
+  type: http
+  seq: 1
+}
+
+delete {
+  url: http://localhost:3000/api/users/{{userId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "sid",
+    "password": "something"
+  }
+}
+
+vars:pre-request {
+  userId: 658e78413e1a0238b1e8e8e4
+}

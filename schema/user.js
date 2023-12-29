@@ -14,8 +14,8 @@ const usersSchema = new mongoose.Schema({
   },
 });
 
-// Create the Meme model
-const Meme = mongoose.model('users', usersSchema);
+// Create the User model
+const User = mongoose.model('users', usersSchema);
 
-// Export the Meme model
-module.exports = Meme;
+// Export the User model
+module.exports = User;

@@ -47,10 +47,4 @@ const remove = async (req, res) => {
   res.send(meme);
 };
 
-module.exports = {
-  list,
-  show,
-  create,
-  update,
-  remove,
-};
+module.exports = { list, show, create, update, remove };
