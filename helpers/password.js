@@ -1,4 +1,5 @@
 const crypto = require('node:crypto');
+const jwt = require('jsonwebtoken');
 
 const hashPassword = (password) => {
   const salt = crypto.randomBytes(16).toString('hex');
@@ -16,4 +17,14 @@ const verifyPassword = (password, hashedPassword) => {
   return key === derievedKey.toString('hex');
 };
 
-module.exports = { hashPassword, verifyPassword };
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: '1d',
+  });
+};
+
+const verifyToken = (token) => {
+  return jwt.verify(token, process.env.JWT_SECRET);
+};
+
+module.exports = { hashPassword, verifyPassword, createToken, verifyToken };

@@ -9,7 +9,9 @@ const list = async (req, res) => {
 const show = async (req, res) => {
   const meme = await Meme.findById(req.params.id);
 
-  if (!meme) return res.send('Meme not found! :(');
+  if (!meme) {
+    return res.send('Meme not found! :(');
+  }
 
   res.send(meme);
 };
@@ -17,9 +19,7 @@ const show = async (req, res) => {
 // Create data
 const create = async (req, res) => {
   const newMeme = new Meme(req.body);
-
   await newMeme.save();
-
   res.status(201).send(newMeme);
 };
 
@@ -27,12 +27,12 @@ const create = async (req, res) => {
 const update = async (req, res) => {
   const meme = await Meme.findById(req.params.id);
 
-  if (!meme) return res.send('Meme not found! :(');
+  if (!meme) {
+    return res.send('Meme not found! :(');
+  }
 
   meme.set(req.body);
-
   await meme.save();
-
   res.send(meme);
 };
 
@@ -40,10 +40,11 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
   const meme = await Meme.findById(req.params.id);
 
-  if (!meme) return res.send('Meme not found! :(');
+  if (!meme) {
+    return res.send('Meme not found! :(');
+  }
 
   await meme.deleteOne();
-
   res.send(meme);
 };
 

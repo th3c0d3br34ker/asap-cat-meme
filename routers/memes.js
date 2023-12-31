@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const memeController = require('../controller/memes')
+const memeController = require('../controllers/memes')
 
 router.get('/', memeController.list);
 router.get('/:id', memeController.show);
