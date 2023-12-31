@@ -1,63 +1,18 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, } from 'react';
 
-const storageAPI = {
-  set: () => {},
-  get: () => {},
-  remove: () => {},
+export const AuthContext = createContext({
+  user: null,
+  login: () => {},
+  logout: () => {},
+  isLoggedIn: () => {},
+})
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+
+  return context;
 };
-
-// Mock sessionStorage
-storageAPI.set = (key, value) => {
-  sessionStorage.setItem(key, JSON.stringify(value));
-
-  return value;
-};
-
-storageAPI.get = (key) => {
-  const value = sessionStorage.getItem(key);
-
-  return value && JSON.parse(value);
-};
-
-storageAPI.remove = (key) => {
-  sessionStorage.removeItem(key);
-};
-
-const useAuth = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const user = storageAPI.get('user');
-
-    if (user) {
-      setUser(user);
-    }
-
-  }, []);
-
-  const login = (username, password) => {
-    const user = { username, password };
-
-    storageAPI.set('user', user);
-    setUser(user);
-  };
-
-  const logout = () => {
-    storageAPI.remove('user');
-    setUser(null);
-  };
-
-  const isLoggedIn = () => {
-    
-    return !!storageAPI.get('user');
-  };
-
-  return {
-    user,
-    login,
-    logout,
-    isLoggedIn,
-  };
-};
-
-export default useAuth;

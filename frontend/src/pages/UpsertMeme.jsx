@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import memeAPI from '../api/meme';
+import Button from '../components/Button';
 
-const API_URI = import.meta.env.VITE_API_URI;
-
-const AddMeme = () => {
+const UpsertMeme = () => {
   const params = useParams();
   const navigate = useNavigate();
 
@@ -13,61 +13,48 @@ const AddMeme = () => {
     name: '',
     img_url: '',
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (mode === 'EDIT') {
-      fetch(API_URI + '/memes/' + params.id)
-        .then((res) => res.json())
-        .then((fetchedData) => {
-          console.log(fetchedData);
-          setData(fetchedData);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
+      showMeme(params.id);
     }
+
+    if (mode === 'CREATE') {
+      setLoading(false);
+    }
+
   }, [mode, params.id]);
 
   const handleChange = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
   };
 
+  const showMeme = async (id) => {
+    const meme = await memeAPI.show(id);
+    setData(meme);
+    setLoading(false);
+  }
+
   const createMeme = async () => {
-    const response = await fetch(API_URI + '/memes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.status === 201) {
-      setData({
-        name: '',
-        img_url: '',
-      });
-
-      alert('Meme added successfully!');
-    }
+    setLoading(true);
+    const createdMeme = await memeAPI.create(data);
+    setData(createdMeme);
+    setLoading(false);
+    alert('Meme added successfully!');
   };
 
   const updateMeme = async () => {
-    const response = await fetch(API_URI + '/memes/' + params.id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+    setLoading(true);
+    const updatedMeme = await memeAPI.update(params.id, data);
 
-    if (response.status === 200) {
-      alert('Meme updated successfully!');
-    }
+    setData(updatedMeme);
+    setLoading(false);
+    alert('Meme updated successfully!');
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(data);
 
     if (mode === 'CREATE') {
       await createMeme();
@@ -106,12 +93,12 @@ const AddMeme = () => {
           onChange={handleChange}
         />
 
-        <button type='submit' className='submit-button'>
+        <Button type='submit' className='submit-button' loading={loading}>
           {mode === 'CREATE' ? '➕' : '✏️'} Meme
-        </button>
+        </Button>
       </form>
     </>
   );
 };
 
-export default AddMeme;
+export default UpsertMeme;
