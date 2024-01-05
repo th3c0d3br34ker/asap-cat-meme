@@ -1,0 +1,4 @@
+0. Installed express and nodemon.
+1. Created a server js file and added basic code to list on port 3000.
+2. Add script to package.json to run the server.
+3. Created a simple get endpoint to return a message.

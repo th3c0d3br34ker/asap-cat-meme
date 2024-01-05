@@ -1,0 +1,8 @@
+1. I installed mongoose
+2. I created a connection string
+3. I learnt how to load from env.local
+4. I am now able to connect to my remote database
+
+----
+
+5. I created dummy data cloud database using mongo server.

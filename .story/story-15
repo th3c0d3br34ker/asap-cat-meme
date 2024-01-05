@@ -1,0 +1,2 @@
+1. I added a route to get a specific entity by id.
+2. I created a upsert component to edit and delete entities.
