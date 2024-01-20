@@ -11,10 +11,15 @@ body {
   width: 100vw;
 }
 
-.wrapper {
+.home-wrapper {
+  padding: 12px 16px;
+}
+
+.meme-list-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 32px;
 }
 
 .card {
@@ -22,12 +27,9 @@ body {
 }
 
 .meme-card {
-  max-width: 25%;
   border: 3px solid black;
-  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 16px;
 }
 
 .meme-title {
@@ -42,7 +44,7 @@ body {
 
 .meme-img {
   width: 280px;
-  height: 220px;
+  height: 280px;
   border-bottom: 1px solid black;
   object-fit: scale-down;
 }
@@ -79,7 +81,7 @@ input {
 .top-nav {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: space-between;
 }
 
 button {
@@ -102,7 +104,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
+  height: calc(100vh - 250px);
 }
 
 .auth-header {
@@ -119,6 +121,20 @@ button:hover {
   width: 400px;
   margin: auto;
   border: 3px solid black;
-  border-radius: 4px;
   padding: 16px;
+}
+
+/* Navbar */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 3px solid black;
+}
+
+span.emoji {
+  font-size: 30px;
+  vertical-align: middle;
+  line-height: 2;
 }

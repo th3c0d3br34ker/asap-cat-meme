@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
-import {useAuth} from '../hooks/useAuth';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuth } from '../hooks/useAuth';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,10 +17,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (auth.isLoggedIn()) {
+    if (auth.user) {
       navigate('/');
     }
-  }, [auth.user]);
+  }, [auth.user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className='auth-wrapper'>
@@ -34,7 +35,7 @@ const Login = () => {
           <input type='password' id='password' name='password' />
 
           <button className='login-button' type='submit'>
-            Login
+            👤 Login
           </button>
         </form>
       </div>

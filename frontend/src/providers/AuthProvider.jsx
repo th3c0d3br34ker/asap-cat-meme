@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import authAPI from '../api/auth';
 import storageAPI from '../utils/storage';
 import { AuthContext } from '../hooks/useAuth';
@@ -34,24 +35,12 @@ const AuthProvider = ({ children }) => {
   // Function to handle user logout
   const logout = async () => {
     try {
-      await authAPI.logout();
+      await authAPI.verify(user);
       storageAPI.remove('user');
       setUser(null);
     } catch (error) {
       console.error('Logout failed:', error);
     }
-  };
-
-  // Function to check if a user is logged in
-  const isLoggedIn = () => {
-    const user = storageAPI.get('user');
-
-    if (user) {
-      setUser(user);
-      return true;
-    }
-
-    return false;
   };
 
   // Check if a user is already authenticated on component mount
@@ -79,7 +68,6 @@ const AuthProvider = ({ children }) => {
     loading,
     login,
     logout,
-    isLoggedIn,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

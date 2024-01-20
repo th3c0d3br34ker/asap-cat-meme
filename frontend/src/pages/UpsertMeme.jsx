@@ -23,7 +23,6 @@ const UpsertMeme = () => {
     if (mode === 'CREATE') {
       setLoading(false);
     }
-
   }, [mode, params.id]);
 
   const handleChange = (event) => {
@@ -34,7 +33,7 @@ const UpsertMeme = () => {
     const meme = await memeAPI.show(id);
     setData(meme);
     setLoading(false);
-  }
+  };
 
   const createMeme = async () => {
     setLoading(true);
@@ -82,6 +81,7 @@ const UpsertMeme = () => {
           id='name'
           name='name'
           value={data.name}
+          disabled={loading}
           onChange={handleChange}
         />
 
@@ -90,6 +90,7 @@ const UpsertMeme = () => {
           id='img_url'
           name='img_url'
           value={data.img_url}
+          disabled={loading}
           onChange={handleChange}
         />
 
