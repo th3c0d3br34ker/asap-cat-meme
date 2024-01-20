@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const requestLogger = require('./middlewares/requestLogger');
+
 mongoose.connect(process.env.MONGO_URI);
 
 mongoose.connection.once('open', () => {
@@ -19,6 +21,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+app.use(requestLogger);
 
 app.get('/', (req, res) => {
   res.send('o_O');
