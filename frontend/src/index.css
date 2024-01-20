@@ -1,9 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  background-color: ;
+  height: 100vh;
+  width: 100vw;
 }
 
 .wrapper {
@@ -36,10 +41,10 @@
 }
 
 .meme-img {
-  width: 100%;
-  min-width: 120px;
-  height: auto;
+  width: 280px;
+  height: 220px;
   border-bottom: 1px solid black;
+  object-fit: scale-down;
 }
 
 .meme-body {
@@ -91,14 +96,27 @@ button:hover {
   background-color: #f0f0f0;
 }
 
-
 /* Login Page */
+
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.auth-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .login-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 400px;
+  width: 400px;
   margin: auto;
   border: 3px solid black;
   border-radius: 4px;

@@ -22,12 +22,8 @@ const Login = () => {
   }, [auth.user]);
 
   return (
-    <>
-      <div className='top-nav'>
-        <button onClick={() => navigate('/')}>🔙 Go Back</button>
-      </div>
-
-      <h1>Login</h1>
+    <div className='auth-wrapper'>
+      <h1 className='auth-header'>Login</h1>
 
       <div className='login-container'>
         <form className='login-form' onSubmit={handleSubmit}>
@@ -42,7 +38,7 @@ const Login = () => {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

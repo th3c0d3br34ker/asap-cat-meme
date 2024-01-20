@@ -21,7 +21,7 @@ authAPI.login = async ({ username, password }) => {
     });
 
     if (res.status !== 200) {
-      const error = await res.text();
+      const error = await res.json();
       console.error(error);
       return null;
     }
