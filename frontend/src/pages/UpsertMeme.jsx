@@ -22,6 +22,10 @@ const UpsertMeme = () => {
 
     if (mode === 'CREATE') {
       setLoading(false);
+      setData({
+        name: '',
+        img_url: '',
+      })
     }
   }, [mode, params.id]);
 
