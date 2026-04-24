@@ -1,7 +1,7 @@
 {
   "name": "asap-cat-meme",
   "version": "1.0.0",
-  "description": "### Introduction",
+  "description": "A demo project to learn the MERN stack.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
